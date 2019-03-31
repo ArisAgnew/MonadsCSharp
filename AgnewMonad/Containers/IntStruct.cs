@@ -1,5 +1,7 @@
 ﻿using System;
 
+using static System.Console;
+
 namespace AgnewMonad
 {
     public struct IntStruct
@@ -8,7 +10,7 @@ namespace AgnewMonad
 
         public int Value { get; }
 
-        public IntStruct(in int value) => Value = value;
+        public IntStruct(in int value) => this.Value = value;
 
         public IntStruct Interlock(Func<int, IntStruct> func)
         {
@@ -20,6 +22,12 @@ namespace AgnewMonad
                 }
             }
             return func(Value);
+        }
+
+        public IntStruct Depict()
+        {
+            WriteLine($"Full result of {nameof(IntStruct)} monad type is: {Value}");
+            return this;
         }
 
         public static implicit operator IntStruct(int value) => new IntStruct(value);

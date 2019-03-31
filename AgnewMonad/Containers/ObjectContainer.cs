@@ -21,5 +21,10 @@ namespace AgnewMonad
             }
             return func(Value);
         }
+
+        public IMonad<object> Depict()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

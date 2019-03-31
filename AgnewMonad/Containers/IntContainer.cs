@@ -1,5 +1,7 @@
 ﻿using System;
 
+using static System.Console;
+
 namespace AgnewMonad
 {
     public sealed class IntContainer<T> : IMonad<int>
@@ -21,7 +23,13 @@ namespace AgnewMonad
             }
             return func(Value);
         }
-        
+
+        public IMonad<int> Depict()
+        {
+            WriteLine($"Full result of {nameof(IntContainer<int>)} monad type is: {Value}");
+            return this as IntContainer<int> ?? default;
+        }
+
         public static implicit operator IntContainer<T>(int value) => new IntContainer<T>(value);
         public static explicit operator int(IntContainer<T> intContainer) => intContainer.Value;
     }

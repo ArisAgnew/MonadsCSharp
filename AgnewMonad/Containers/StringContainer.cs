@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Text;
 
+using static System.Console;
+
 namespace AgnewMonad
 {
     public sealed class StringContainer<T> : StringContainerExtention<string>, IMonad<string>
@@ -34,6 +36,12 @@ namespace AgnewMonad
                 }
             }
             return func(StringBuilder);
+        }
+        
+        public IMonad<string> Depict()
+        {
+            WriteLine($"Full result of {nameof(StringContainer<string>)} monad type is: {Value}");
+            return this;
         }
 
         public static implicit operator StringContainer<T>(string value) => new StringContainer<T>(value);

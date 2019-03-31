@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 
 using static System.Console;
 
@@ -8,27 +9,24 @@ namespace AgnewMonad
     {
         static void Main(string[] args)
         {
-            /* The solution by using a struct is actually more fine-drawn & shorter as compared with using a class. 
+            /* 
+             * The solution by using a struct is actually more fine-drawn & shorter as compared with using a class. 
              * There is no need to create an instance using a struct.
              */
             {
-                IntStruct _intStructInitial = 10;
-
-                var _intStruct = _intStructInitial
+                var _intStruct = ((IntStruct)new Func<int>(() => 10)())
                     .Interlock(v => v + 10)
                     .Interlock(v => v * 4)
-                    .Interlock(v => v + (v * 1 / 4));
-
-                WriteLine(_intStruct.Value);
+                    .Interlock(v => v + (v * 1 / 4))
+                    .Depict();
             }
 
             {
                 var _int = new IntContainer<int>(10)
-                  .Interlock(v => new IntContainer<int>(v + 10))
-                  .Interlock(v => new IntContainer<int>(v * 4))
-                  .Interlock(v => new IntContainer<int>(v + (v * 1 / 4)));
-
-                WriteLine(_int.Value);
+                    .Interlock(v => new IntContainer<int>(v + 10))
+                    .Interlock(v => new IntContainer<int>(v * 4))
+                    .Interlock(v => new IntContainer<int>(v + (v * 1 / 4)))
+                    .Depict();
             }
 
             {
